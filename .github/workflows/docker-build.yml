@@ -20,6 +20,10 @@ jobs:
       - name: Checkout repository
         uses: actions/checkout@v7.0.1
 
+        # New: emulator so the amd64 runner can execute ARM build steps
+      - name: Set up QEMU
+        uses: docker/setup-qemu-action@v4.4.0
+
       # 2. Set up Docker Buildx
       - name: Set up Docker Buildx
         uses: docker/setup-buildx-action@v4.4.1
@@ -49,7 +53,6 @@ jobs:
           context: ./src
           file: ./src/Dockerfile
           push: true
-          platforms:
-            -linux/arm64
+          platforms: linux/amd64,linux/arm64
           tags: ${{ steps.meta.outputs.tags }}
           labels: ${{ steps.meta.outputs.labels }}
