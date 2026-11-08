@@ -1,0 +1,14 @@
+name: Docker CI/CD
+
+on:
+  push:
+    branches:
+      - main
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: First step
+        run: echo "Hello GitHub Actions"
